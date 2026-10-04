@@ -263,7 +263,7 @@ class CartItemsListSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(
-                    Icons.add_circle_outline,
+                    Icons.add_circle,
                     color: kCaramelSecondary,
                     size: 19,
                   ),

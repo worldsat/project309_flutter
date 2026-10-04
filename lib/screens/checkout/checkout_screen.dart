@@ -94,23 +94,28 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   void _handleRemoveItem(String itemId) {
+    final index = _items.indexWhere((it) => it.id == itemId);
+    final removed = index != -1 ? _items[index] : null;
     setState(() {
       _items.removeWhere((it) => it.id == itemId);
     });
-    showBrewCraftToast(context, 'Item removed from bag');
+    if (removed != null) {
+      showBrewCraftToast(context, 'Removed ${removed.name} from bag');
+    }
   }
 
   void _handleApplyVoucher() {
-    if (_voucherCode.trim().toUpperCase() == 'BREWFIRST') {
+    if (_voucherCode.trim().isNotEmpty) {
       setState(() => _voucherApplied = true);
-      showBrewCraftToast(context, 'Promo voucher applied: \$2.00 off');
-    } else if (_voucherCode.trim().isNotEmpty) {
-      showBrewCraftToast(context, 'Invalid promo voucher code');
+      showBrewCraftToast(context, '${_voucherCode.trim()} coupon applied (-\$2.00)');
     }
   }
 
   void _handleRemoveVoucher() {
-    setState(() => _voucherApplied = false);
+    setState(() {
+      _voucherApplied = false;
+      _voucherCode = '';
+    });
     showBrewCraftToast(context, 'Voucher removed');
   }
 
@@ -122,7 +127,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _isSubmitting = false;
       _orderSubmitted = true;
     });
-    await Future.delayed(const Duration(milliseconds: 400));
+    showBrewCraftToast(context, 'Order Placed! #BC-8942 • $_branchName');
+    await Future.delayed(const Duration(milliseconds: 500));
     if (!mounted) return;
     widget.onNavigateToTracker();
   }
@@ -135,7 +141,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         title: 'Checkout',
         onBackClick: widget.onNavigateBack,
         onMoreClick: () {
-          showBrewCraftToast(context, 'Options: Clear bag, Add promo');
+          showBrewCraftToast(context, 'Order settings & invoice options');
+        },
+        onProfileClick: () {
+          showBrewCraftToast(context, 'Signed in as Alex');
         },
       ),
       bottomNavigationBar: CheckoutStickyBottomBar(
@@ -164,7 +173,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             items: _items,
             onUpdateQuantity: _handleUpdateQuantity,
             onRemoveItem: _handleRemoveItem,
-            onAddMoreClicked: widget.onAddMoreItems,
+            onAddMoreClicked: () {
+              widget.onAddMoreItems();
+              showBrewCraftToast(context, 'Browse Bakery & Roastery');
+            },
           ),
 
           // Promotions & Benefits Section (Input & Applied Voucher Banner)
@@ -198,7 +210,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               setState(() => _selectedPayment = pay);
             },
             onAddNewClicked: () {
-              showBrewCraftToast(context, 'Add New Card / Payment Method');
+              showBrewCraftToast(context, 'Add new payment card');
             },
           ),
 

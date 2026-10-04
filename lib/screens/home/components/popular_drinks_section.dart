@@ -70,7 +70,7 @@ class PopularDrinksSection extends StatelessWidget {
           // Two-Column Grid items
           for (int i = 0; i < drinks.length; i += 2)
             Padding(
-              padding: const EdgeInsets.only(bottom: 14.0),
+              padding: const EdgeInsets.only(bottom: 12.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

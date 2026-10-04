@@ -135,7 +135,7 @@ class CustomizerStickyBottomBar extends StatelessWidget {
                         Row(
                           children: [
                             const Icon(
-                              Icons.shopping_bag_outlined,
+                              Icons.shopping_bag,
                               color: Colors.white,
                               size: 20,
                             ),

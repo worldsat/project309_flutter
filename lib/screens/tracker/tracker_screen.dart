@@ -60,13 +60,14 @@ class _TrackerScreenState extends State<TrackerScreen> {
 
   void _handleDownloadReceipt() async {
     setState(() => _isGeneratingReceipt = true);
-    await Future.delayed(const Duration(milliseconds: 900));
+    showBrewCraftToast(context, 'Generating PDF Receipt...');
+    await Future.delayed(const Duration(milliseconds: 1200));
     if (!mounted) return;
     setState(() {
       _isGeneratingReceipt = false;
       _receiptSaved = true;
     });
-    showBrewCraftToast(context, 'Receipt downloaded: BrewCraft_Order_8924.pdf');
+    showBrewCraftToast(context, 'Order Receipt Saved! (BC-8924.pdf)');
   }
 
   void _handleRedeemReward(String rewardId) {
@@ -75,9 +76,9 @@ class _TrackerScreenState extends State<TrackerScreen> {
       setState(() {
         _memberBeans -= reward.costBeans;
       });
-      showBrewCraftToast(context, 'Redeemed: ${reward.title} for next visit!');
+      showBrewCraftToast(context, 'Redeemed ${reward.title} for ${reward.costBeans} beans!');
     } else {
-      showBrewCraftToast(context, 'Need ${reward.costBeans} beans to redeem');
+      showBrewCraftToast(context, 'Not enough beans to redeem this reward yet.');
     }
   }
 
@@ -89,7 +90,10 @@ class _TrackerScreenState extends State<TrackerScreen> {
         title: 'Live Order Tracker',
         onBackClick: widget.onNavigateBack,
         onMoreClick: () {
-          showBrewCraftToast(context, 'Tracker Options: Share ETA, Contact store');
+          showBrewCraftToast(context, 'Tracker settings & share order link');
+        },
+        onProfileClick: () {
+          showBrewCraftToast(context, 'Signed in as Alex');
         },
       ),
       body: ListView(
@@ -97,7 +101,6 @@ class _TrackerScreenState extends State<TrackerScreen> {
         children: [
           // Live Pickup Tracker Banner
           const TrackerHeaderBanner(),
-          const SizedBox(height: 6),
 
           // Active Order Status Card with Stepper & Barista Note
           ActiveOrderStatusCard(
@@ -107,7 +110,6 @@ class _TrackerScreenState extends State<TrackerScreen> {
             baristaName: _baristaName,
             baristaNote: _baristaNote,
           ),
-          const SizedBox(height: 6),
 
           // Digital Pickup Pass & Store QR Card
           DigitalPickupPassCard(
@@ -116,13 +118,12 @@ class _TrackerScreenState extends State<TrackerScreen> {
             storeName: _storeName,
             storeAddress: _storeAddress,
             onGetDirections: () {
-              showBrewCraftToast(context, 'Opening map directions to Downtown Roastery...');
+              showBrewCraftToast(context, 'Opening directions to $_storeAddress in Maps...');
             },
             onCallStore: () {
-              showBrewCraftToast(context, 'Calling Downtown Roastery: (212) 555-0194');
+              showBrewCraftToast(context, 'Calling $_storeName at (212) 555-0194...');
             },
           ),
-          const SizedBox(height: 6),
 
           // Loyalty & Rewards Progress Card
           LoyaltyRewardsCard(
@@ -135,11 +136,9 @@ class _TrackerScreenState extends State<TrackerScreen> {
             rewards: _rewards,
             onRedeemReward: _handleRedeemReward,
           ),
-          const SizedBox(height: 6),
 
           // Store Atmosphere Sensory Visual Card
           const AtmosphereVisualCard(),
-          const SizedBox(height: 6),
 
           // Bottom Action Buttons (Download Receipt & Help)
           TrackerActionButtons(
@@ -147,7 +146,7 @@ class _TrackerScreenState extends State<TrackerScreen> {
             receiptSaved: _receiptSaved,
             onDownloadReceipt: _handleDownloadReceipt,
             onNeedHelp: () {
-              showBrewCraftToast(context, 'Support team connected: +1-800-BREWCRAFT');
+              showBrewCraftToast(context, 'BrewCraft Concierge: Contacting barista team for $_orderNumber...');
             },
           ),
 

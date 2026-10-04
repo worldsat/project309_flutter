@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../theme/colors.dart';
 import '../../../theme/typography.dart';
 
-class PromotionsSection extends StatelessWidget {
+class PromotionsSection extends StatefulWidget {
   final String voucherCode;
   final bool voucherApplied;
   final ValueChanged<String> onVoucherCodeChange;
@@ -17,6 +17,34 @@ class PromotionsSection extends StatelessWidget {
     required this.onApplyVoucher,
     required this.onRemoveVoucher,
   });
+
+  @override
+  State<PromotionsSection> createState() => _PromotionsSectionState();
+}
+
+class _PromotionsSectionState extends State<PromotionsSection> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.voucherCode);
+  }
+
+  @override
+  void didUpdateWidget(covariant PromotionsSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.voucherCode != _controller.text) {
+      _controller.text = widget.voucherCode;
+      _controller.selection = TextSelection.collapsed(offset: widget.voucherCode.length);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +88,8 @@ class PromotionsSection extends StatelessWidget {
 
                 Expanded(
                   child: TextField(
-                    controller: TextEditingController(text: voucherCode)..selection = TextSelection.collapsed(offset: voucherCode.length),
-                    onChanged: onVoucherCodeChange,
+                    controller: _controller,
+                    onChanged: widget.onVoucherCodeChange,
                     cursorColor: kCaramelSecondary,
                     style: BrewCraftTypography.bodyMedium.copyWith(
                       color: kSandOnSurface,
@@ -81,7 +109,7 @@ class PromotionsSection extends StatelessWidget {
 
                 // Apply Button
                 GestureDetector(
-                  onTap: onApplyVoucher,
+                  onTap: widget.onApplyVoucher,
                   child: Container(
                     decoration: BoxDecoration(
                       color: kEspressoPrimary,
@@ -104,7 +132,7 @@ class PromotionsSection extends StatelessWidget {
           const SizedBox(height: 8),
 
           // Applied Voucher Tag Banner
-          if (voucherApplied)
+          if (widget.voucherApplied)
             Container(
               decoration: BoxDecoration(
                 color: kCaramelSecondaryFixed,
@@ -157,7 +185,7 @@ class PromotionsSection extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: onRemoveVoucher,
+                    onTap: widget.onRemoveVoucher,
                     child: const Padding(
                       padding: EdgeInsets.all(4.0),
                       child: Icon(
@@ -175,3 +203,4 @@ class PromotionsSection extends StatelessWidget {
     );
   }
 }
+

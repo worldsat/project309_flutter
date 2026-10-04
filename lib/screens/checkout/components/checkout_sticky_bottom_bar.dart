@@ -45,7 +45,8 @@ class CheckoutStickyBottomBar extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: isSubmitting ? null : onPlaceOrderClicked,
-                child: Container(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
                   height: 56,
                   decoration: BoxDecoration(
                     color: buttonColor,
@@ -106,7 +107,7 @@ class CheckoutStickyBottomBar extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Icon(
-                                      Icons.shopping_bag_outlined,
+                                      Icons.shopping_bag,
                                       color: Colors.white,
                                       size: 22,
                                     ),

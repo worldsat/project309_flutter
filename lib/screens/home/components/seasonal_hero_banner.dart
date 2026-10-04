@@ -3,11 +3,34 @@ import '../../../theme/colors.dart';
 import '../../../theme/shapes.dart';
 import '../../../theme/typography.dart';
 
+class PromoBannerItem {
+  final String badgeTag;
+  final String discountTag;
+  final String title;
+  final String description;
+  final String price;
+  final String originalPrice;
+  final String imagePath;
+
+  const PromoBannerItem({
+    this.badgeTag = "Limited Edition",
+    this.discountTag = "20% OFF TODAY",
+    this.title = "Autumn Maple Latte",
+    this.description =
+        "Dark-roasted single origin blend infused with pure Vermont maple and velvety steamed oat milk.",
+    this.price = "\$4.95",
+    this.originalPrice = "\$6.20",
+    this.imagePath = "assets/images/banner.jpg",
+  });
+}
+
 class SeasonalHeroBanner extends StatelessWidget {
+  final PromoBannerItem item;
   final VoidCallback onTryNowClick;
 
   const SeasonalHeroBanner({
     super.key,
+    this.item = const PromoBannerItem(),
     required this.onTryNowClick,
   });
 
@@ -37,7 +60,7 @@ class SeasonalHeroBanner extends StatelessWidget {
               Opacity(
                 opacity: 0.40,
                 child: Image.asset(
-                  'assets/images/banner.jpg',
+                  item.imagePath,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -76,7 +99,7 @@ class SeasonalHeroBanner extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                           child: Text(
-                            'Limited Edition',
+                            item.badgeTag,
                             style: BrewCraftTypography.labelSmall.copyWith(
                               fontWeight: FontWeight.w600,
                               color: kCaramelOnSecondaryFixed,
@@ -84,7 +107,7 @@ class SeasonalHeroBanner extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '20% OFF TODAY',
+                          item.discountTag,
                           style: BrewCraftTypography.titleSmall.copyWith(
                             fontWeight: FontWeight.bold,
                             color: kCaramelSecondaryFixed,
@@ -99,7 +122,7 @@ class SeasonalHeroBanner extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Autumn Maple Latte',
+                          item.title,
                           style: BrewCraftTypography.headlineSmall.copyWith(
                             fontWeight: FontWeight.w600,
                             color: kSandSurfaceContainerLowest,
@@ -107,7 +130,7 @@ class SeasonalHeroBanner extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Dark-roasted single origin blend infused with pure Vermont maple and velvety steamed oat milk.',
+                          item.description,
                           style: BrewCraftTypography.bodySmall.copyWith(
                             color: kSandSurfaceVariant,
                             height: 16 / 12,
@@ -128,7 +151,7 @@ class SeasonalHeroBanner extends StatelessWidget {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
-                              '\$4.95',
+                              item.price,
                               style: BrewCraftTypography.titleLarge.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: kSandSurfaceContainerLowest,
@@ -136,7 +159,7 @@ class SeasonalHeroBanner extends StatelessWidget {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              '\$6.20',
+                              item.originalPrice,
                               style: BrewCraftTypography.bodySmall.copyWith(
                                 decoration: TextDecoration.lineThrough,
                                 color: kEspressoOutlineVariant,

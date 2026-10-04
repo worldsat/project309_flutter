@@ -28,7 +28,7 @@ class BrewCraftBottomBar extends StatelessWidget {
   IconData _getTabIcon(BottomNavTab tab) {
     switch (tab) {
       case BottomNavTab.home:
-        return Icons.explore_outlined;
+        return Icons.storefront_outlined;
       case BottomNavTab.menu:
         return Icons.local_cafe_outlined;
       case BottomNavTab.cart:

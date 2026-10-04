@@ -25,12 +25,10 @@ class BrewCraftTopAppBar extends StatelessWidget implements PreferredSizeWidget 
       height: 64.0,
       color: kSandSurface,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SafeArea(
-        bottom: false,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
             // Left side: Logo badge + Brand title + Branch location
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -147,7 +145,6 @@ class BrewCraftTopAppBar extends StatelessWidget implements PreferredSizeWidget 
             ),
           ],
         ),
-      ),
     );
   }
 }

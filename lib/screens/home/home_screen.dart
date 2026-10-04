@@ -135,7 +135,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 showBrewCraftToast(context, 'Filter: All Roasts & Brew Types');
               },
             ),
-            const SizedBox(height: 4),
 
             // 4. BrewCraft Club Card
             BrewCraftClubCard(
@@ -146,7 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 showBrewCraftToast(context, 'Next Tier: Platinum at 400 beans');
               },
             ),
-            const SizedBox(height: 8),
 
             // 5. Explore Categories
             CategoryChipRow(
@@ -156,7 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() => _selectedCategory = cat);
               },
             ),
-            const SizedBox(height: 12),
 
             // 6. Seasonal Promotional Hero
             SeasonalHeroBanner(
@@ -164,7 +161,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 widget.onNavigateToCustomizer('autumn_maple_latte');
               },
             ),
-            const SizedBox(height: 8),
 
             // 7. Popular Drinks Two-Column Grid
             PopularDrinksSection(
@@ -175,13 +171,15 @@ class _HomeScreenState extends State<HomeScreen> {
               onDrinkClick: widget.onNavigateToCustomizer,
               onSeeAllClick: () {
                 setState(() {
+                  _selectedTab = BottomNavTab.menu;
                   _selectedCategory = 'All';
                   _searchQuery = '';
                 });
               },
             ),
 
-            const SizedBox(height: 24),
+            // Bottom Spacing
+            const SizedBox(height: 16),
           ],
         ),
       ),

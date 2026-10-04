@@ -3,7 +3,7 @@ import '../../../theme/colors.dart';
 import '../../../theme/shapes.dart';
 import '../../../theme/typography.dart';
 
-class SearchBarSection extends StatelessWidget {
+class SearchBarSection extends StatefulWidget {
   final String query;
   final ValueChanged<String> onQueryChange;
   final VoidCallback onVoiceClick;
@@ -16,6 +16,34 @@ class SearchBarSection extends StatelessWidget {
     required this.onVoiceClick,
     required this.onFilterClick,
   });
+
+  @override
+  State<SearchBarSection> createState() => _SearchBarSectionState();
+}
+
+class _SearchBarSectionState extends State<SearchBarSection> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.query);
+  }
+
+  @override
+  void didUpdateWidget(covariant SearchBarSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.query != _controller.text) {
+      _controller.text = widget.query;
+      _controller.selection = TextSelection.collapsed(offset: widget.query.length);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +70,8 @@ class SearchBarSection extends StatelessWidget {
             // Search text input
             Expanded(
               child: TextField(
-                onChanged: onQueryChange,
-                controller: TextEditingController(text: query)..selection = TextSelection.collapsed(offset: query.length),
+                controller: _controller,
+                onChanged: widget.onQueryChange,
                 cursorColor: kEspressoPrimary,
                 style: BrewCraftTypography.bodyMedium.copyWith(
                   color: kSandOnSurface,
@@ -63,7 +91,7 @@ class SearchBarSection extends StatelessWidget {
 
             // Voice search button
             GestureDetector(
-              onTap: onVoiceClick,
+              onTap: widget.onVoiceClick,
               child: Container(
                 width: 38,
                 height: 38,
@@ -83,7 +111,7 @@ class SearchBarSection extends StatelessWidget {
 
             // Filter button in circular surface
             GestureDetector(
-              onTap: onFilterClick,
+              onTap: widget.onFilterClick,
               child: Container(
                 width: 38,
                 height: 38,

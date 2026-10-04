@@ -10,7 +10,7 @@ void showBrewCraftToast(BuildContext context, String message) {
       backgroundColor: Colors.transparent,
       elevation: 0,
       behavior: SnackBarBehavior.floating,
-      margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+      margin: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
       content: Center(
         child: Container(
           decoration: BoxDecoration(

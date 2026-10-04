@@ -130,7 +130,7 @@ class BrewCraftClubCard extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(
-                      Icons.card_giftcard,
+                      Icons.redeem,
                       color: kCaramelSecondary,
                       size: 15,
                     ),

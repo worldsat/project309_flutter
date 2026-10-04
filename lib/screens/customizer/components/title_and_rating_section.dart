@@ -21,69 +21,86 @@ class TitleAndRatingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Top Row: Product Name & Base Price
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Text(
-                  productName,
-                  style: BrewCraftTypography.headlineSmall.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: kEspressoPrimary,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      productName,
+                      style: BrewCraftTypography.headlineSmall.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: kEspressoPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.star_rounded,
+                          color: kCaramelSecondary,
+                          size: 18,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          '$rating',
+                          style: BrewCraftTypography.titleSmall.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: kEspressoPrimary,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          reviewCount,
+                          style: BrewCraftTypography.bodySmall.copyWith(
+                            color: kSandOnSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 8),
-              Text(
-                formattedBasePrice,
-                style: BrewCraftTypography.titleLarge.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: kEspressoPrimary,
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'BASE',
+                      style: BrewCraftTypography.labelSmall.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: kSandOnSurfaceVariant,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                    Text(
+                      formattedBasePrice,
+                      style: BrewCraftTypography.titleLarge.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: kCaramelSecondary,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
-
-          // Rating Row
-          Row(
-            children: [
-              const Icon(
-                Icons.star_rounded,
-                color: kCaramelSecondaryContainer,
-                size: 18,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                '$rating',
-                style: BrewCraftTypography.titleSmall.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: kSandOnSurface,
-                ),
-              ),
-              const SizedBox(width: 4),
-              Text(
-                reviewCount,
-                style: BrewCraftTypography.labelSmall.copyWith(
-                  color: kSandOnSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
 
           // Full Description
           Text(
             description,
-            style: BrewCraftTypography.bodySmall.copyWith(
+            style: BrewCraftTypography.bodyMedium.copyWith(
               color: kSandOnSurfaceVariant,
-              height: 18 / 12,
+              height: 22 / 14,
             ),
           ),
         ],
@@ -91,3 +108,4 @@ class TitleAndRatingSection extends StatelessWidget {
     );
   }
 }
+

@@ -96,7 +96,7 @@ class BrewProductCard extends StatelessWidget {
                     const Icon(
                       Icons.star_rounded,
                       color: kCaramelSecondaryContainer,
-                      size: 16,
+                      size: 14,
                     ),
                     const SizedBox(width: 3),
                     Text(

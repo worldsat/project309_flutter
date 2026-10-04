@@ -3,7 +3,7 @@ import '../../../theme/colors.dart';
 import '../../../theme/shapes.dart';
 import '../../../theme/typography.dart';
 
-class BaristaNotesSection extends StatelessWidget {
+class BaristaNotesSection extends StatefulWidget {
   final String notes;
   final ValueChanged<String> onNotesChange;
 
@@ -12,6 +12,33 @@ class BaristaNotesSection extends StatelessWidget {
     required this.notes,
     required this.onNotesChange,
   });
+
+  @override
+  State<BaristaNotesSection> createState() => _BaristaNotesSectionState();
+}
+
+class _BaristaNotesSectionState extends State<BaristaNotesSection> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.notes);
+  }
+
+  @override
+  void didUpdateWidget(covariant BaristaNotesSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.notes != _controller.text) {
+      _controller.text = widget.notes;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +53,7 @@ class BaristaNotesSection extends StatelessWidget {
               const Icon(
                 Icons.edit_note,
                 color: kCaramelSecondary,
-                size: 20,
+                size: 18,
               ),
               const SizedBox(width: 6),
               Text(
@@ -53,8 +80,8 @@ class BaristaNotesSection extends StatelessWidget {
                 SizedBox(
                   height: 54,
                   child: TextField(
-                    controller: TextEditingController(text: notes)..selection = TextSelection.collapsed(offset: notes.length),
-                    onChanged: onNotesChange,
+                    controller: _controller,
+                    onChanged: widget.onNotesChange,
                     maxLines: 2,
                     cursorColor: kCaramelSecondary,
                     style: BrewCraftTypography.bodyMedium.copyWith(

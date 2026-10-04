@@ -6,8 +6,7 @@ plugins {
 
 android {
     namespace = "com.brewcraft.app.brewcraft_app"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 37
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

@@ -126,7 +126,10 @@ class _CustomizerScreenState extends State<CustomizerScreen> {
         title: _drink.name,
         onBackClick: widget.onNavigateBack,
         onMoreClick: () {
-          showBrewCraftToast(context, 'Options: Share recipe, Dietary info');
+          showBrewCraftToast(context, 'Product options & nutritional facts');
+        },
+        onProfileClick: () {
+          showBrewCraftToast(context, 'Signed in as Alex');
         },
       ),
       bottomNavigationBar: CustomizerStickyBottomBar(
@@ -139,6 +142,10 @@ class _CustomizerScreenState extends State<CustomizerScreen> {
         },
         onAddToCart: () {
           final item = _toCartItem();
+          showBrewCraftToast(
+            context,
+            'Added ${_quantity}x ${_drink.name} to Cart ($_formattedTotalPrice)',
+          );
           widget.onNavigateToCheckout(item);
         },
       ),
@@ -178,7 +185,7 @@ class _CustomizerScreenState extends State<CustomizerScreen> {
               setState(() => _cupSize = size);
             },
             onVolumeGuideClick: () {
-              showBrewCraftToast(context, 'Standard sizing: Small 8oz, Med 12oz, Lrg 16oz');
+              showBrewCraftToast(context, 'Small: 8oz • Medium: 12oz • Large: 16oz');
             },
           ),
 
