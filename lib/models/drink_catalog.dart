@@ -1,0 +1,153 @@
+import 'customizer_options.dart';
+import 'drink_item.dart';
+
+class DrinkCatalog {
+  static const List<DrinkDetailData> drinks = [
+    DrinkDetailData(
+      id: "caramel_macchiato",
+      name: "Caramel Macchiato",
+      subtitle: "Layered espresso, steamed milk, vanilla & caramel drizzle.",
+      category: "Hot & Iced",
+      basePrice: 4.85,
+      rating: 4.9,
+      reviewCount: "1.2k",
+      fullReviewCount: "(1,240 reviews)",
+      calories: "180 kcal",
+      description:
+          "Rich espresso poured over vanilla-infused textured milk and finished with our signature handcrafted caramel drizzle.",
+      imagePath: "assets/images/caramel_macchiato.png",
+      tag1: "100% Arabica",
+      tag2: "Medium Roast",
+      defaultServingStyle: ServingStyle.iced,
+      defaultCupSize: CupSize.medium,
+      defaultShots: 2,
+      defaultMilk: MilkOption.oat,
+      defaultSweetness: SweetnessLevel.standard50,
+      defaultIce: IceLevel.lessIce,
+    ),
+    DrinkDetailData(
+      id: "iced_spanish_latte",
+      name: "Iced Spanish Latte",
+      subtitle: "Sweetened condensed milk, double shot espresso, dash of cinnamon.",
+      category: "Sweet & Creamy",
+      basePrice: 5.20,
+      rating: 4.8,
+      reviewCount: "850",
+      fullReviewCount: "(850 reviews)",
+      calories: "210 kcal",
+      description:
+          "Bold espresso blended with sweetened condensed milk and fresh whole milk over ice, dusted with fragrant ground cinnamon.",
+      imagePath: "assets/images/iced_spanish_latte.jpg",
+      tag1: "Signature Blend",
+      tag2: "Dark Roast",
+      defaultServingStyle: ServingStyle.iced,
+      defaultCupSize: CupSize.medium,
+      defaultShots: 2,
+      defaultMilk: MilkOption.whole,
+      defaultSweetness: SweetnessLevel.standard50,
+      defaultIce: IceLevel.regularIce,
+    ),
+    DrinkDetailData(
+      id: "nitro_cold_brew",
+      name: "Nitro Cold Brew",
+      subtitle: "Velvety cascade infused with nitrogen for smooth texture.",
+      category: "Reserve Cold",
+      basePrice: 4.50,
+      rating: 4.9,
+      reviewCount: "2.1k",
+      fullReviewCount: "(2,100 reviews)",
+      calories: "5 kcal",
+      description:
+          "Slow-steeped craft cold brew infused with food-grade nitrogen for a velvety cascade, ultra-smooth body, and rich micro-foam crema head.",
+      imagePath: "assets/images/nitro_cold_brew.png",
+      tag1: "Single Origin",
+      tag2: "Nitrogen Infused",
+      defaultServingStyle: ServingStyle.iced,
+      defaultCupSize: CupSize.medium,
+      defaultShots: 1,
+      defaultMilk: MilkOption.whole,
+      defaultSweetness: SweetnessLevel.noSugar,
+      defaultIce: IceLevel.noIce,
+    ),
+    DrinkDetailData(
+      id: "oat_milk_flat_white",
+      name: "Oat Milk Flat White",
+      subtitle: "Ristretto double shot blended with microfoam oat milk.",
+      category: "Artisanal Hot",
+      basePrice: 4.95,
+      rating: 4.7,
+      reviewCount: "630",
+      fullReviewCount: "(630 reviews)",
+      calories: "140 kcal",
+      description:
+          "Expertly pulled ristretto double shot blended with silky steamed barista-grade oat milk, finished with microfoam latte art.",
+      imagePath: "assets/images/oat_milk_flat_white.png",
+      tag1: "Ristretto Double",
+      tag2: "Blonde Roast",
+      defaultServingStyle: ServingStyle.hot,
+      defaultCupSize: CupSize.medium,
+      defaultShots: 2,
+      defaultMilk: MilkOption.oat,
+      defaultSweetness: SweetnessLevel.noSugar,
+      defaultIce: IceLevel.noIce,
+    ),
+    DrinkDetailData(
+      id: "autumn_maple_latte",
+      name: "Autumn Maple Latte",
+      subtitle: "Single origin blend infused with Vermont maple & oat milk.",
+      category: "Signature Lattes",
+      basePrice: 4.95,
+      rating: 4.9,
+      reviewCount: "340",
+      fullReviewCount: "(340 reviews)",
+      calories: "230 kcal",
+      description:
+          "Dark-roasted single origin blend infused with pure Vermont maple and velvety steamed oat milk, garnished with spiced nutmeg.",
+      imagePath: "assets/images/banner.jpg",
+      tag1: "Limited Edition",
+      tag2: "Vermont Maple",
+      defaultServingStyle: ServingStyle.hot,
+      defaultCupSize: CupSize.medium,
+      defaultShots: 2,
+      defaultMilk: MilkOption.oat,
+      defaultSweetness: SweetnessLevel.standard50,
+      defaultIce: IceLevel.noIce,
+    ),
+    DrinkDetailData(
+      id: "almond_croissant",
+      name: "Almond Croissant",
+      subtitle: "Warm & flaky pastry filled with rich almond cream.",
+      category: "Pastries",
+      basePrice: 3.80,
+      rating: 4.9,
+      reviewCount: "420",
+      fullReviewCount: "(420 reviews)",
+      calories: "320 kcal",
+      description:
+          "Twice-baked buttery Parisian croissant filled with rich frangipane almond cream and topped with toasted sliced almonds.",
+      imagePath: "assets/images/almond_croissant.png",
+      tag1: "Freshly Baked",
+      tag2: "Artisan Bakery",
+      defaultServingStyle: ServingStyle.hot,
+      defaultCupSize: CupSize.small,
+      defaultShots: 1,
+      defaultMilk: MilkOption.whole,
+      defaultSweetness: SweetnessLevel.standard50,
+      defaultIce: IceLevel.noIce,
+    ),
+  ];
+
+  static DrinkDetailData getDrinkDetail(String id) {
+    return drinks.firstWhere(
+      (d) => d.id.toLowerCase() == id.toLowerCase(),
+      orElse: () => drinks.firstWhere(
+        (d) => d.name.toLowerCase().contains(id.toLowerCase()),
+        orElse: () => drinks.first,
+      ),
+    );
+  }
+
+  static List<DrinkItem> getHomeDrinkItems() {
+    return drinks.map((d) => d.toHomeDrinkItem()).toList();
+  }
+}
