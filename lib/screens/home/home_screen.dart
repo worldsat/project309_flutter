@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../models/drink_catalog.dart';
 import '../../models/drink_item.dart';
 import '../../theme/colors.dart';
@@ -94,10 +95,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final drinksToShow = displayedDrinks.isEmpty && _searchQuery.isEmpty ? _allDrinks : displayedDrinks;
 
-    return Scaffold(
-      backgroundColor: kSandSurface,
-      body: SafeArea(
-        bottom: false,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        backgroundColor: kSandSurface,
+        body: SafeArea(
+          bottom: false,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -195,6 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
       ),
-    );
-  }
+    ),
+  );
+}
 }

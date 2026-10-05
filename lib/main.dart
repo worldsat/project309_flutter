@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'models/cart_item.dart';
 import 'models/drink_item.dart';
 import 'screens/checkout/checkout_screen.dart';
 import 'screens/customizer/customizer_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/tracker/tracker_screen.dart';
+import 'theme/colors.dart';
 import 'theme/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: kSandSurface,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+  );
   runApp(const BrewCraftApp());
 }
 
